@@ -2,12 +2,17 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xmlns="http://www.springframework.org/schema/beans" xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-   <!-- <aop:config>
-        <aop:aspect id="emptyStatement" ref="sessionFilter">
-            <aop:pointcut id="pointcut" expression="execution(public * com.cat.zsy.dao.*(..))"/>
+    <!--<aop:config proxy-target-class="true">
+        <aop:aspect id="namespace" ref="sessionFilter">
+            &lt;!&ndash;<aop:pointcut id="pointcut" expression="execution(public * com.cat.zsy.dao.base.TemplateSession*..*(..)) and target(com.cat.zsy.dao.base.TemplateSession)"/>&ndash;&gt;
+            &lt;!&ndash;<aop:pointcut id="pointcut" expression="execution(public * com.cat.zsy.dao.base.CustomSession+.*(..))"/>&ndash;&gt;
+            <aop:pointcut id="pointcut" expression="execution(public * org.mybatis.spring.SqlSessionTemplate.*(String,..))"/>
             <aop:around method="namespace" pointcut-ref="pointcut"/>
         </aop:aspect>
     </aop:config>-->
-
-    <bean id="sessionFilter" class="com.cat.zsy.aop.SessionFilter"/>
+    <!--resource && proxy 强制使用CGLIB代理-->
+    <!--<aop:config proxy-target-class="true"/>-->
+    <bean id="sessionFilter" class="com.cat.zsy.aop.SessionFilter">
+        <property name="scanPackageName" value="com.cat.zsy.dao.impl"/>
+    </bean>
 </beans>

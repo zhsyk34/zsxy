@@ -6,6 +6,7 @@ import com.cat.zsy.common.Sort;
 import com.cat.zsy.dao.RoleDao;
 import com.cat.zsy.dao.base.TemplateSession;
 import com.cat.zsy.entity.Role;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -21,9 +22,16 @@ public class RoleDaoImpl implements RoleDao {
 	@Resource
 	private TemplateSession session;
 
+	@Resource
+	private SqlSessionTemplate sessionTemplate;
+
 	@Override
 	public int save(Role role) {
-		return session.insert(role);
+		long begin = System.nanoTime();
+		int r = sessionTemplate.insert(RoleDao.class.getName() + ".save", role);
+		long end = System.nanoTime();
+		System.out.println((end - begin) / 1000 + " us.");
+		return r;
 	}
 
 	@Override

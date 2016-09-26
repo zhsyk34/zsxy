@@ -14,9 +14,12 @@ public class DaoKit {
 	 * @param name     需要匹配的信息
 	 * @param match    匹配规则
 	 * @param desc     是否逆序搜寻
-	 * @return
+	 * @return 索引位置
 	 */
 	private static int findIndex(StackTraceElement[] elements, String name, Match match, boolean desc) {
+		/*for (int i = 0; i < elements.length; i++) {
+			System.out.println(i + ":" + elements[i].getClassName() + "." + elements[i].getMethodName());
+		}*/
 		String className;
 		if (desc) {
 			for (int i = elements.length - 1; i > -1; i--) {
@@ -28,7 +31,7 @@ public class DaoKit {
 		} else {
 			for (int i = 0; i < elements.length; i++) {
 				className = elements[i].getClassName();
-				System.out.println(i + ":" + className + "" + elements[i].getClassName());
+				//System.out.println(i + ":" + className + "." + elements[i].getMethodName());
 				if (match.test(name, className)) {
 					return i;
 				}
