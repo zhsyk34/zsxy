@@ -8,7 +8,7 @@
     </settings>
 
     <plugins>
-        <plugin interceptor="com.cat.zsy.interceptor.MybatisInterceptor"></plugin>
+        <plugin interceptor="com.cat.zsy.interceptor.MybatisInterceptor"/>
     </plugins>
 
     <!--3.4+ not need-->
