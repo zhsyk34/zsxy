@@ -12,6 +12,7 @@
         <module>kit</module>
         <module>zsy</module>
         <module>network</module>
+        <module>network</module>
     </modules>
 
     <properties>
@@ -45,6 +46,9 @@
         <!--tools-->
         <lombok.version>1.16.10</lombok.version>
         <jackson.version>2.8.1</jackson.version>
+
+        <!--netty-->
+        <netty.version>5.0.0.Alpha2</netty.version>
     </properties>
 
     <dependencies>
