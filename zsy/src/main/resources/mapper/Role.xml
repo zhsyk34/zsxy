@@ -101,4 +101,16 @@
             </if>
         </where>
     </sql>
+
+    <select id="findMap" resultMap="test">
+        SELECT * FROM
+        <include refid="entity"/>
+        <include refid="search"/>
+        <include refid="sort"/>
+        <include refid="page"/>
+    </select>
+    <resultMap id="test" type="role">
+        <id property="roleId" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
 </mapper>

@@ -6,10 +6,13 @@ import com.cat.zsy.common.Sort;
 import com.cat.zsy.entity.Role;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RoleDao extends CommonDao<Role, Long> {
 
-    List<Role> findList(String name, Sort sort, Page page);
+	List<Role> findList(String name, Sort sort, Page page);
 
-    int count(String name);
+	int count(String name);
+
+	Map<Long, String> findMap();
 }

@@ -11,6 +11,7 @@
     <modules>
         <module>kit</module>
         <module>zsy</module>
+        <module>network</module>
     </modules>
 
     <properties>
