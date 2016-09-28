@@ -11,27 +11,27 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 public class TimeClient {
 
-    public static void main(String[] args) throws Exception {
-        new TimeClient().connect(Config.HOST, Config.PORT);
+	public static void main(String[] args) throws Exception {
+		new TimeClient().connect(Config.HOST, Config.PORT);
 //		System.out.print("line:" + System.getProperty("line.separator"));
-    }
+	}
 
-    public void connect(String host, int port) throws Exception {
-        EventLoopGroup group = new NioEventLoopGroup();
+	public void connect(String host, int port) throws Exception {
+		EventLoopGroup group = new NioEventLoopGroup();
 
-        Bootstrap bootstrap = new Bootstrap();
-        bootstrap.group(group)
-                .channel(NioSocketChannel.class)
-                .option(ChannelOption.TCP_NODELAY, true)
-                .handler(new ChannelInitializer<SocketChannel>() {
-                    @Override
-                    protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        socketChannel.pipeline().addLast(new TimeClientHandle());
-                    }
-                });
-        System.out.println("client connect...");
-        ChannelFuture f = bootstrap.connect(host, port).sync();
-        f.channel().closeFuture().sync();
-        group.shutdownGracefully();
-    }
+		Bootstrap bootstrap = new Bootstrap();
+		bootstrap.group(group)
+				.channel(NioSocketChannel.class)
+				.option(ChannelOption.TCP_NODELAY, true)
+				.handler(new ChannelInitializer<SocketChannel>() {
+					@Override
+					protected void initChannel(SocketChannel socketChannel) throws Exception {
+						socketChannel.pipeline().addLast(new TimeClientHandle());
+					}
+				});
+		System.out.println("client connect...");
+		ChannelFuture f = bootstrap.connect(host, port).sync();
+		f.channel().closeFuture().sync();
+		group.shutdownGracefully();
+	}
 }

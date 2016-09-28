@@ -19,13 +19,11 @@ import java.util.Map;
 @Repository
 public class RoleDaoImpl implements RoleDao {
 
+	private static final String SPACE = RoleDao.class.getName() + ".";
 	@Resource
 	private TemplateSession session;
-
 	@Resource
 	private SqlSessionTemplate sessionTemplate;
-
-	private static final String SPACE = RoleDao.class.getName() + ".";
 
 	@Override
 	public int save(Role role) {

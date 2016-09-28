@@ -10,10 +10,10 @@ import java.util.Properties;
 
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class})})
 public class PageInterceptor implements Interceptor {
-    static final Logger logger = LoggerFactory.getLogger(PageInterceptor.class);
+	static final Logger logger = LoggerFactory.getLogger(PageInterceptor.class);
 
-    public Object intercept(Invocation invocation) throws Throwable {
-       /* RoutingStatementHandler handler = (RoutingStatementHandler) invocation.getTarget();
+	public Object intercept(Invocation invocation) throws Throwable {
+	   /* RoutingStatementHandler handler = (RoutingStatementHandler) invocation.getTarget();
         BaseStatementHandler delegate = (BaseStatementHandler) BeanPropertyUtils.getFieldValue(handler, "delegate");
 
         BoundSql boundSql = delegate.getBoundSql();
@@ -58,17 +58,17 @@ public class PageInterceptor implements Interceptor {
 
         BeanPropertyUtils.setFieldValue(boundSql, "sql", model.pageSql(sql));*/
 
-        return invocation.proceed();
-    }
+		return invocation.proceed();
+	}
 
-    @Override
-    public Object plugin(Object target) {
+	@Override
+	public Object plugin(Object target) {
     /* 当目标类是StatementHandler类型时，才包装目标类，不做无谓的代理 */
-        return (target instanceof StatementHandler) ? Plugin.wrap(target, this) : target;
-    }
+		return (target instanceof StatementHandler) ? Plugin.wrap(target, this) : target;
+	}
 
-    @Override
-    public void setProperties(Properties properties) {
-    }
+	@Override
+	public void setProperties(Properties properties) {
+	}
 
 }

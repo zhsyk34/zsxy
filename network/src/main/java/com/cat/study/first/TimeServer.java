@@ -11,32 +11,32 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class TimeServer {
 
-    public static void main(String[] args) throws Exception {
-        new TimeServer().bind(Config.PORT);
-    }
+	public static void main(String[] args) throws Exception {
+		new TimeServer().bind(Config.PORT);
+	}
 
-    public void bind(int port) throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+	public void bind(int port) throws Exception {
+		EventLoopGroup bossGroup = new NioEventLoopGroup();
+		EventLoopGroup workerGroup = new NioEventLoopGroup();
 
-        ServerBootstrap bootstrap = new ServerBootstrap();
-        bootstrap.group(bossGroup, workerGroup)
-                .channel(NioServerSocketChannel.class)
-                .option(ChannelOption.SO_BACKLOG, 1024)
-                .childHandler(new ChildChannelHandler());
+		ServerBootstrap bootstrap = new ServerBootstrap();
+		bootstrap.group(bossGroup, workerGroup)
+				.channel(NioServerSocketChannel.class)
+				.option(ChannelOption.SO_BACKLOG, 1024)
+				.childHandler(new ChildChannelHandler());
 
-        System.out.println("server start...");
-        ChannelFuture f = bootstrap.bind(port).sync();
-        f.channel().closeFuture().sync();
-        bossGroup.shutdownGracefully();
-        workerGroup.shutdownGracefully();
+		System.out.println("server start...");
+		ChannelFuture f = bootstrap.bind(port).sync();
+		f.channel().closeFuture().sync();
+		bossGroup.shutdownGracefully();
+		workerGroup.shutdownGracefully();
 
-    }
+	}
 
-    private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
-        @Override
-        protected void initChannel(SocketChannel channel) throws Exception {
-            channel.pipeline().addLast(new TimeServerHandle());
-        }
-    }
+	private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
+		@Override
+		protected void initChannel(SocketChannel channel) throws Exception {
+			channel.pipeline().addLast(new TimeServerHandle());
+		}
+	}
 }
